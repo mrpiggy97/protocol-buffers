@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package userEntity;
+
+option go_package = "./user";
+
+enum Category{
+    DEVELOPER = 0;
+    OPERATOR = 1;
+}

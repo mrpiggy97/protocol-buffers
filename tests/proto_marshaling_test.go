@@ -1,13 +1,13 @@
-package main
+package tests
 
 import (
-	"fmt"
+	"testing"
 
 	"github.com/mrpiggy97/protocol-buffers/user"
 	"google.golang.org/protobuf/proto"
 )
 
-func main() {
+func TestProtoMarshaling(testCase *testing.T) {
 	var userA *user.User = &user.User{UserId: "fabian123123", Email: "email@example.com"}
 	var userB *user.User = &user.User{UserId: "ddfd111", Email: "another@example.com"}
 	var userC *user.User = &user.User{UserId: "caasd222", Email: "example@email.com"}
@@ -18,17 +18,8 @@ func main() {
 		Category: user.Category_DEVELOPER,
 		Users:    userSlice,
 	}
-
-	fmt.Println("to encode", usersGroup.String())
-	encoded, err := proto.Marshal(usersGroup)
+	_, err := proto.Marshal(usersGroup)
 	if err != nil {
-		panic(err)
+		testCase.Error("err should be nil got", err)
 	}
-	var recoveredUsersGroup *user.Group = new(user.Group)
-	var decodingErr error = proto.Unmarshal(encoded, recoveredUsersGroup)
-	if decodingErr != nil {
-		panic(decodingErr)
-	}
-
-	fmt.Println("\nrecovered:", recoveredUsersGroup.Users[0])
 }
