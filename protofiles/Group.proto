@@ -12,4 +12,5 @@ message Group{
     Category category = 2;
     float score = 3;
     repeated User users = 4;
+    User winner = 5;
 }

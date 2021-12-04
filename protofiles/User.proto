@@ -5,7 +5,20 @@ package userEntity;
 
 option go_package = "./user";
 
+
+message Developer{
+    string language = 1;
+}
+
+message Operator{
+    string platform = 1;
+}
+
 message User{
     string user_id = 1;
     string email = 2;
+    oneof type{
+        Developer developer = 3;
+        Operator operator = 4;
+    }
 }

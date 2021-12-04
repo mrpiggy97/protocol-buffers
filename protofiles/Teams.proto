@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package userEntity;
+
+import "protofiles/User.proto";
+
+option go_package = "./user";
+
+message UserList{
+    repeated User users = 1;
+}
+
+message Teams{
+    map<string,UserList> team = 1;
+}
